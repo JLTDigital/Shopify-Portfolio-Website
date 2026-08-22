@@ -1,0 +1,107 @@
+/* JLT Digital brand overrides */
+
+:root {
+	--brand-pink: #ff2c6d;
+	--brand-black: #000000;
+	--brand-mint: #03ffc5;
+	--brand-mint-hover: #6bffe0;
+	--brand-mint-active: #00e6b3;
+}
+
+a:hover {
+	color: var(--brand-pink);
+	border-bottom-color: var(--brand-pink);
+}
+
+.button.primary:hover,
+input[type="submit"].primary:hover,
+input[type="reset"].primary:hover,
+input[type="button"].primary:hover,
+button.primary:hover {
+	background-color: var(--brand-mint-hover);
+}
+
+.image.badge {
+	display: block;
+	margin: 2rem 0 0 0;
+	max-width: 18rem;
+}
+
+.image.badge img {
+	width: 100%;
+	height: auto;
+	border-radius: 0.75rem;
+}
+
+.badge-note {
+	padding: 0.85rem 1rem;
+	border-left: 3px solid var(--brand-pink);
+	background: rgba(255, 44, 109, 0.06);
+}
+
+.skill-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.65rem;
+	list-style: none;
+	margin: 0 0 2rem 0;
+	padding: 0;
+}
+
+.skill-tags li {
+	background: #000000;
+	color: #ffffff;
+	border-radius: 999px;
+	font-family: "Raleway", Helvetica, sans-serif;
+	font-size: 0.65rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	line-height: 1;
+	padding: 0.7rem 1rem;
+	text-transform: uppercase;
+}
+
+.skill-tags li:nth-child(3n) {
+	background: var(--brand-pink);
+}
+
+.skill-tags li:nth-child(4n) {
+	background: var(--brand-black);
+	box-shadow: inset 0 0 0 2px var(--brand-mint);
+	color: var(--brand-mint);
+}
+
+#skills h3 {
+	margin-bottom: 0.85rem;
+	letter-spacing: 0.12em;
+}
+
+.gallery a img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.honeypot {
+	display: none !important;
+}
+
+.recaptcha-wrap {
+	margin: 0 0 1.5rem 0;
+}
+
+.form-status {
+	margin: 0 0 1.25rem 0;
+}
+
+.form-status.is-success {
+	color: #000000;
+	border-left: 3px solid var(--brand-mint);
+	padding-left: 0.85rem;
+}
+
+.form-status.is-error {
+	color: #000000;
+	border-left: 3px solid var(--brand-pink);
+	padding-left: 0.85rem;
+}
