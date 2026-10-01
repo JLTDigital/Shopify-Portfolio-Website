@@ -507,6 +507,25 @@ def scripts(root, contact=False):
 \t\t</script>"""
 
 
+def site_nav(root, current):
+    home = f"{root}index.html"
+
+    def item(key, href, label):
+        current_attr = ' aria-current="page"' if key == current else ""
+        return f'<li><a href="{href}"{current_attr}>{label}</a></li>'
+
+    return (
+        "\t\t<nav class=\"site-nav\" aria-label=\"Site\">\n"
+        f"\t\t\t<a class=\"site-nav-home\" href=\"{home}\">Jonny Taft</a>\n"
+        "\t\t\t<ul>\n"
+        f"\t\t\t\t{item('home', home, 'Home')}\n"
+        f"\t\t\t\t{item('work', home + '#work', 'Work')}\n"
+        f"\t\t\t\t{item('readme', root + 'readme.html', 'Readme.md')}\n"
+        "\t\t\t</ul>\n"
+        "\t\t</nav>"
+    )
+
+
 def contact_section():
     return """\t\t\t\t<section id="contact">
 \t\t\t\t\t<header>
@@ -679,6 +698,7 @@ def render_post(post, newer, older):
 {page_head}
 \t</head>
 \t<body class="is-preload">
+{site_nav(root, "readme")}
 \t\t<div id="wrapper">
 \t\t\t\t<section class="intro">
 \t\t\t\t\t<header>
@@ -787,6 +807,7 @@ def render_index(posts):
 {page_head}
 \t</head>
 \t<body class="is-preload">
+{site_nav("", "readme")}
 \t\t<div id="wrapper">
 \t\t\t\t<section class="intro">
 \t\t\t\t\t<header>

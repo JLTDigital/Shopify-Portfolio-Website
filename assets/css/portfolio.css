@@ -106,6 +106,62 @@ button.primary:hover {
 	padding-left: 0.85rem;
 }
 
+.site-nav {
+	align-items: center;
+	background: #000000;
+	opacity: 0.8;
+	width: 50%;
+	display: flex;
+	gap: 1rem 1.5rem;
+	justify-content: space-between;
+	left: 0;
+	padding: 0.75rem 1.25rem;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 10000;
+}
+
+.site-nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.85rem 1.25rem;
+	justify-content: flex-end;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.site-nav li {
+	margin: 0;
+	padding: 0;
+}
+
+.site-nav a {
+	border-bottom: 0;
+	color: #ffffff;
+	font-family: "Raleway", Helvetica, sans-serif;
+	font-size: 0.62rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.site-nav a:hover {
+	color: var(--brand-mint);
+}
+
+.site-nav a[aria-current="page"] {
+	color: var(--brand-pink);
+}
+
+@media screen and (max-width: 736px) {
+	#wrapper > section.intro > header {
+		padding-top: 6.75rem;
+	}
+}
+
 .eyebrow {
 	font-family: "Raleway", Helvetica, sans-serif;
 	font-size: 0.65rem;
