@@ -410,6 +410,7 @@ def head(title, description, canonical, image, extra=""):
         f"""\t\t<title>{esc(title)}</title>
 \t\t<meta charset="utf-8" />
 \t\t<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+\t\t<script src="{{root}}assets/js/smooth-hash.js"></script>
 \t\t<meta name="description" content="{esc_attr(description)}" />
 \t\t<meta name="author" content="Jonny Taft" />
 \t\t<link rel="canonical" href="{esc_attr(canonical)}" />

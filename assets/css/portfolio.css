@@ -106,6 +106,20 @@ button.primary:hover {
 	padding-left: 0.85rem;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
+section {
+	scroll-margin-top: 4.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
 .site-nav {
 	align-items: center;
 	background: #000000;
@@ -159,6 +173,10 @@ button.primary:hover {
 @media screen and (max-width: 736px) {
 	#wrapper > section.intro > header {
 		padding-top: 6.75rem;
+	}
+
+	.site-nav {
+		width: 100%;
 	}
 }
 
