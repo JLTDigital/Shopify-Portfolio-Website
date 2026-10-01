@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+	<channel>
+		<title>Readme.md · Jonny Taft</title>
+		<link>https://jlt.digital/readme.html</link>
+		<description>Notes from Jonny Taft on Shopify themes, JavaScript, and building for the web.</description>
+		<language>en-gb</language>
+		<item>
+			<title>A Developer’s Technical Breakdown of Shopify’s Horizon Theme</title>
+			<link>https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-horizon-theme.html</link>
+			<guid>https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-horizon-theme.html</guid>
+			<pubDate>Fri, 11 Jul 2025 16:09:23 +0000</pubDate>
+			<description>Horizon is Shopify’s latest flagship Online Store 2.0 theme, launched as a bold alternative to Dawn. Designed for brands that want visual storytelling…</description>
+		</item>
+		<item>
+			<title>A Developer’s Technical Breakdown of Shopify’s Dawn Theme</title>
+			<link>https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-dawn-theme.html</link>
+			<guid>https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-dawn-theme.html</guid>
+			<pubDate>Fri, 11 Jul 2025 15:26:58 +0000</pubDate>
+			<description>This might be a few years late but when Shopify released the Dawn theme, it wasn’t just offering merchants a new storefront design — it was introducing a…</description>
+		</item>
+		<item>
+			<title>ITerm 2 &amp; ZSH script for Git Branch</title>
+			<link>https://jlt.digital/posts/iterm-2-zsh-script-for-git-branch.html</link>
+			<guid>https://jlt.digital/posts/iterm-2-zsh-script-for-git-branch.html</guid>
+			<pubDate>Wed, 04 May 2022 21:08:29 +0000</pubDate>
+			<description>Every developer who has a Mac has used the standard Mac terminal that comes straight out of the box. Now it works and you can do all your usual stuff but…</description>
+		</item>
+		<item>
+			<title>NFTs. What are they all about?</title>
+			<link>https://jlt.digital/posts/nfts-what-are-they-all-about.html</link>
+			<guid>https://jlt.digital/posts/nfts-what-are-they-all-about.html</guid>
+			<pubDate>Fri, 23 Apr 2021 18:21:03 +0000</pubDate>
+			<description>Non Fungible Tokens or (NFTs) as they are known are becoming all the rage in the blockchain and crypto world.</description>
+		</item>
+		<item>
+			<title>5 Important Software Design Patterns…</title>
+			<link>https://jlt.digital/posts/5-important-software-design-patterns.html</link>
+			<guid>https://jlt.digital/posts/5-important-software-design-patterns.html</guid>
+			<pubDate>Sun, 28 Mar 2021 18:52:34 +0000</pubDate>
+			<description>Design patterns are a kind of template or description for software design. They can help with problem-solving in various different situations and are…</description>
+		</item>
+		<item>
+			<title>Can Apple make the future Augmented…</title>
+			<link>https://jlt.digital/posts/can-apple-make-the-future-augmented.html</link>
+			<guid>https://jlt.digital/posts/can-apple-make-the-future-augmented.html</guid>
+			<pubDate>Sun, 21 Mar 2021 17:22:30 +0000</pubDate>
+			<description>You’ve probably heard of augmented reality (AR) and virtual reality (VR) and even used them in some capacity. AR though is going to become big, possibly…</description>
+		</item>
+		<item>
+			<title>DeFi.</title>
+			<link>https://jlt.digital/posts/defi.html</link>
+			<guid>https://jlt.digital/posts/defi.html</guid>
+			<pubDate>Mon, 18 Jan 2021 09:13:49 +0000</pubDate>
+			<description>An important piece in the crypto world is the use of stable coins. Currently the most widely used are the Dai stable coin, the USDC, and Tether stable…</description>
+		</item>
+		<item>
+			<title>Why I started coding.</title>
+			<link>https://jlt.digital/posts/why-i-started-coding.html</link>
+			<guid>https://jlt.digital/posts/why-i-started-coding.html</guid>
+			<pubDate>Mon, 16 Nov 2020 23:25:58 +0000</pubDate>
+			<description>It has taken me a long time but I finally feel like I have found something that I thoroughly enjoy. My journey so far through web development and coding…</description>
+		</item>
+		<item>
+			<title>Wireless Charging. Potential disaster or nothing to be concerned about?</title>
+			<link>https://jlt.digital/posts/wireless-charging-potential-disaster-or-nothing-to-be-concerned-about.html</link>
+			<guid>https://jlt.digital/posts/wireless-charging-potential-disaster-or-nothing-to-be-concerned-about.html</guid>
+			<pubDate>Mon, 24 Aug 2020 21:10:39 +0000</pubDate>
+			<description>Wireless charging made it into a few tech publications recently because of its efficiency issues.</description>
+		</item>
+		<item>
+			<title>Why I’m Excited For Neuralink and the potential for Symbiosis With AI</title>
+			<link>https://jlt.digital/posts/why-im-excited-for-neuralink-and-the-potential-for-symbiosis-with-ai.html</link>
+			<guid>https://jlt.digital/posts/why-im-excited-for-neuralink-and-the-potential-for-symbiosis-with-ai.html</guid>
+			<pubDate>Tue, 11 Aug 2020 20:45:23 +0000</pubDate>
+			<description>Some of my all-time favorite movies, TV shows, and games share this theme of the cyberpunk / dystopian future where people in society are one with…</description>
+		</item>
+		<item>
+			<title>5 Ways Blockchain Will Be Important In The Future.</title>
+			<link>https://jlt.digital/posts/5-ways-blockchain-will-be-important-in-the-future.html</link>
+			<guid>https://jlt.digital/posts/5-ways-blockchain-will-be-important-in-the-future.html</guid>
+			<pubDate>Fri, 07 Aug 2020 17:48:27 +0000</pubDate>
+			<description>You’ve probably heard of cryptocurrency and Bitcoin. Maybe your friends have talked in the past about it and excitedly told you about how it's going to be…</description>
+		</item>
+	</channel>
+</rss>

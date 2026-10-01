@@ -1,0 +1,378 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>A Developer’s Technical Breakdown of Shopify’s Horizon Theme · Jonny Taft</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Horizon is Shopify’s latest flagship Online Store 2.0 theme, launched as a bold alternative to Dawn. Designed for brands that want visual storytelling…" />
+		<meta name="author" content="Jonny Taft" />
+		<link rel="canonical" href="https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-horizon-theme.html" />
+		<meta property="og:title" content="A Developer’s Technical Breakdown of Shopify’s Horizon Theme · Jonny Taft" />
+		<meta property="og:description" content="Horizon is Shopify’s latest flagship Online Store 2.0 theme, launched as a bold alternative to Dawn. Designed for brands that want visual storytelling…" />
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-horizon-theme.html" />
+		<meta property="og:image" content="https://jlt.digital/images/posts/a-developers-technical-breakdown-of-shopifys-horizon-theme/cover.png" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<link rel="alternate" type="application/rss+xml" title="Readme.md · Jonny Taft" href="https://jlt.digital/rss.xml" />
+		<meta property="article:published_time" content="2025-07-11T16:09:23.479Z" />
+		<link rel="prev" href="a-developers-technical-breakdown-of-shopifys-dawn-theme.html" />
+		<script type="application/ld+json">
+		{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "headline": "A Developer’s Technical Breakdown of Shopify’s Horizon Theme", "description": "Horizon is Shopify’s latest flagship Online Store 2.0 theme, launched as a bold alternative to Dawn. Designed for brands that want visual storytelling…", "datePublished": "2025-07-11T16:09:23.479Z", "dateModified": "2025-07-11T16:09:23.479Z", "author": {"@type": "Person", "name": "Jonny Taft", "url": "https://jlt.digital/"}, "publisher": {"@type": "Person", "name": "Jonny Taft"}, "image": "https://jlt.digital/images/posts/a-developers-technical-breakdown-of-shopifys-horizon-theme/cover.png", "mainEntityOfPage": "https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-horizon-theme.html", "url": "https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-horizon-theme.html", "inLanguage": "en-GB", "wordCount": 2194, "timeRequired": "PT10M"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://jlt.digital/"}, {"@type": "ListItem", "position": 2, "name": "Readme.md", "item": "https://jlt.digital/readme.html"}, {"@type": "ListItem", "position": 3, "name": "A Developer’s Technical Breakdown of Shopify’s Horizon Theme", "item": "https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-horizon-theme.html"}]}]}
+		</script>
+		<link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<link rel="stylesheet" href="../assets/css/portfolio.css" />
+	</head>
+	<body class="is-preload">
+		<div id="wrapper">
+				<section class="intro">
+					<header>
+						<p class="eyebrow"><a href="../readme.html">Readme.md</a> · <time datetime="2025-07-11">11 July 2025</time> · 10 min read</p>
+						<h1 class="post-title">A Developer’s Technical Breakdown of Shopify’s Horizon Theme</h1>
+						<p>Horizon is Shopify’s latest flagship Online Store 2.0 theme, launched as a bold alternative to Dawn. Designed for brands that want visual storytelling, interactive product reveals, and editorial-style layouts, Horizon…</p>
+						<ul class="actions">
+							<li><a href="#article" class="button primary">Read post</a></li>
+							<li><a href="../index.html" class="button">Work</a></li>
+							<li><a href="#article" class="arrow scrolly"><span class="label">Next</span></a></li>
+						</ul>
+					</header>
+					<div class="content">
+						<span class="image fill" data-position="center"><img src="../images/posts/a-developers-technical-breakdown-of-shopifys-horizon-theme/cover.png" alt="A Developer’s Technical Breakdown of Shopify’s Horizon Theme" /></span>
+					</div>
+				</section>
+				<section id="article">
+					<header>
+						<h2>11 July 2025</h2>
+					</header>
+					<div class="content post-body">
+						<p>Horizon is Shopify’s latest flagship Online Store 2.0 theme, launched as a bold alternative to Dawn. Designed for brands that want visual storytelling, interactive product reveals, and editorial-style layouts, Horizon is more animated, expressive, and opinionated.</p>
+						<p>In this article, we’ll explore the Horizon theme’s architecture, Liquid logic, animations, JavaScript framework, styling system, and customisation workflows — comparing it with Dawn and assessing where it shines or may add complexity.</p>
+						<section>
+							<header>
+								<h3>File Structure &amp; Architecture</h3>
+							</header>
+							<div class="content post-body">
+								<p>Like Dawn, Horizon follows the Online Store 2.0 format, but its structure is denser due to more visual and interactive features.</p>
+<pre><code class="language-bash">/assets
+  app.css
+  animations.js
+  product-media.js
+/blocks
+  _card.liquid
+  button.liquid
+/config
+  settings_schema.json
+/layout
+  theme.liquid
+/locales
+  en.default.json
+/sections
+  main-product.liquid
+  hero-banner.liquid
+/snippets
+  account_actions.liquid
+/templates
+  index.json
+  product.json</code></pre>
+<p><strong>What’s different between Horizon and Dawn?</strong></p>
+<p>Well, there are more prebuilt hero, carousel, and animated media sections as well as an assets folder that includes dedicated JS for animations and Lottie or Scroll-based effects.</p>
+<p><strong>Pros:</strong></p>
+<ul><li>Rich components out of the box (hero banners, grid animations, sticky product blocks).</li><li>Great for storytelling-based layouts or high-AOV brands.</li><li>Still supports drag-and-drop editing and section blocks.</li></ul>
+<p><strong>Cons:</strong></p>
+<ul><li>Heavier structure than Dawn — more files, more dependencies.</li><li>Increased complexity for beginners, modifying layout or animations.</li></ul>
+<p><strong>Best Practices with the file structure and architecture:</strong></p>
+<ul><li>Fork and modularise your changes. Avoid editing Shopify’s animated components unless you know how they work.</li><li>Reuse snippets and avoid bloating templates with visual logic.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Theme Blocks in Horizon: Component-Level Control</h3>
+							</header>
+							<div class="content post-body">
+								<p>One of the defining characteristics of the Horizon theme is its heavy reliance on section blocks as first-class components, rather than treating blocks as simple repeatable content units. In Horizon, blocks are not just placeholders for text or images; they often represent self-contained UI components with their own animation logic, layout behavior, and styling rules.</p>
+<p>Where Dawn uses blocks sparingly and predictably, Horizon pushes blocks much further.</p>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>How Horizon Uses Theme Blocks</h3>
+							</header>
+							<div class="content post-body">
+								<p>In Horizon, blocks are commonly used for:</p>
+<ul><li>Hero media layers (image, video, overlay text)</li><li>Product storytelling elements (feature callouts, scroll-revealed copy)</li><li>Editorial content (quotes, split layouts, image + narrative blocks)</li><li>Animated UI fragments (fade-in text, parallax images, staggered lists)</li></ul>
+<p>A single section may support many block types, each with its own schema and behavior:</p>
+<pre><code class="language-text">&lt;div
+  class="group-block color-{{ block.settings.color_scheme }}"
+&gt;
+  {% content_for 'blocks' %}
+&lt;/div&gt;
+
+{% schema %}
+{
+  "name": "Group",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Group"
+    },
+    {
+      "name": "Column",
+      "settings": {
+        "color_scheme": "scheme-3"
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "text": "&lt;h3&gt;Hello, world!&lt;/h3&gt;"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "&lt;p&gt;How's it going?&lt;\/p&gt;"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}</code></pre>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Why Blocks Matter More in Horizon Than Dawn</h3>
+							</header>
+							<div class="content post-body">
+								<p>In Dawn, sections typically control layout and blocks control content.</p>
+<p>In Horizon, blocks control experience.</p>
+<p>Blocks may:</p>
+<ul><li>Trigger animations when entering the viewport</li><li>Influence scroll behavior</li><li>Modify layout density or spacing</li><li>Enable or disable visual effects per component</li></ul>
+<p>This makes Horizon feel more like a design system than a traditional theme.</p>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Pros of Horizon’s Block-First Approach</h3>
+							</header>
+							<div class="content post-body">
+								<ul><li><strong>Extreme flexibility</strong>: Merchants can rearrange complex layouts without requiring code changes.</li><li><strong>Granular control</strong>: Animations and visual effects can be toggled per block.</li><li><strong>Component thinking</strong>: Encourages developers to build reusable, isolated UI units.</li><li><strong>Editorial storytelling</strong>: Ideal for long-form product pages and brand narratives.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Cons and Trade-Offs</h3>
+							</header>
+							<div class="content post-body">
+								<ul><li><strong>Higher complexity</strong>: Blocks often depend on specific DOM structure and JS hooks.</li><li><strong>Schema bloat risk</strong>: Sections with many block types can become hard to maintain.</li><li><strong>Editor overwhelm</strong>: Too many block options can confuse non-technical users.</li><li><strong>Tighter coupling</strong>: Removing or restructuring blocks can break animations if not handled carefully.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Best Practices for Working with Horizon Blocks</h3>
+							</header>
+							<div class="content post-body">
+								<p><strong>1. Treat blocks like components</strong><br /> Design each block as a self-contained unit with clear responsibilities (markup, animation, settings).</p>
+<p><strong>2. Use block-level toggles</strong><br /> Always provide simple on/off toggles for animations or effects. This helps accessibility and performance tuning.</p>
+<p><strong>3. Keep block schemas focused</strong><br /> Avoid dumping every visual option into every block. Horizon works best when blocks have a clear purpose.</p>
+<p><strong>4. Test block combinations</strong><br /> Because merchants can stack blocks freely, always test edge cases:</p>
+<ul><li>Multiple animated blocks in sequence</li><li>Empty or disabled blocks</li><li>Mobile vs desktop behavior</li></ul>
+<p><strong>5. Respect reduced-motion preferences</strong><br /> Ensure block animations gracefully disable when <code>prefers-reduced-motion</code> is active.</p>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Why This Matters for Developers</h3>
+							</header>
+							<div class="content post-body">
+								<p>If Dawn teaches you how Shopify themes <em>should be structured</em>, Horizon teaches you how far that structure can be pushed. Mastering Horizon’s block system means thinking less like a theme editor and more like a frontend architect, striking a balance between flexibility, performance, and usability.</p>
+<p>Used carefully, Horizon’s block system enables some of the most compelling native storefront experiences Shopify has ever shipped — without relying on third-party page builders or heavy JS frameworks.</p>
+<p>You can find out more about theme blocks by reading the Shopify documentation here:</p>
+<p><a href="https://shopify.dev/docs/storefronts/themes/architecture/blocks/theme-blocks/quick-start?framework=liquid" target="_blank" rel="noopener noreferrer">https://shopify.dev/docs/storefronts/themes/architecture/blocks/theme-blocks/quick-start?framework=liquid</a></p>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Styling System: CSS Variables + Animation Layers</h3>
+							</header>
+							<div class="content post-body">
+								<p>Horizon uses CSS custom properties like Dawn, but it leans more into animations and transitions. Expect rich visuals via <code>@keyframes</code>, <code>scroll-tied effects</code>, and media overlays.</p>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>What are the key points:</h3>
+							</header>
+							<div class="content post-body">
+								<p>Well <code>base.css</code> contains global styling, animations, and utility classes, but Horizon makes use of CSS animation layers for hero sections, transitions, and parallax scrolling. Another concept is the responsive layout tokens that are used and are based on container queries.</p>
+<p>This innovative use of responsive layout tokens powered by container queries is a cutting-edge CSS feature that elevates responsive design beyond traditional viewport-based approaches.</p>
+<h3>What Are Responsive Layout Tokens?</h3>
+<p>Responsive layout tokens are design system variables representing key styling attributes such as spacing, typography, and sizing. Unlike fixed values, these tokens dynamically adjust based on the size of the component’s containing element. This enables components to respond not just to the overall screen size, but to the specific space they occupy, fostering a highly modular and adaptable UI.</p>
+<h3>The Role of Container Queries</h3>
+<p>Traditional responsive design relies heavily on media queries that adjust styles according to the viewport’s width. While effective, this method limits components to respond only to the screen size, regardless of their placement within the page. Container queries, on the other hand, empower components to adapt styles based on their own container’s dimensions. This paradigm shift allows for more granular control and improved flexibility in responsive layouts.</p>
+<h3>How Horizon Implements Responsive Tokens with Container Queries</h3>
+<p>Shopify’s Horizon theme defines layout tokens with multiple values tailored to different container widths. Using CSS <code>@container</code> rules, Horizon applies these tokens conditionally, updating their values as the container’s size changes. Components then consume these tokens via CSS custom properties, enabling seamless adjustment of padding, font sizes, and other layout features based on container context.</p>
+<p>For example, a component’s padding token might increase as the container grows, ensuring consistent spacing whether the component is displayed in a narrow sidebar or a full-width main section. This approach centralises design decisions and promotes consistency across the theme.</p>
+<h3>Advantages of This Approach</h3>
+<p>By leveraging responsive layout tokens and container queries, Horizon achieves a context-aware design that enhances modularity and maintainability. Developers can move components across different sections without breaking their layout integrity, while designers maintain centralised control over styling through tokens. This technique also future-proofs the theme as browser support for container queries continues to expand.</p>
+<p>Harnessing the power of responsive layout tokens in conjunction with container queries represents a significant step forward in building adaptive, robust Shopify themes. Horizon’s implementation serves as a model for designing components that truly respond to their environment, creating a seamless and engaging user experience.</p>
+<p>Here’s a simplified example illustrating this approach:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Define the container */</span>
+<span class="hljs-selector-class">.component-container</span> {
+  container-type: inline-size;
+}</code></pre>
+<pre><code class="language-text">/* Base component styles use a CSS custom property */
+.component {
+  padding: var(--layout-padding, 12px);
+  font-size: var(--font-size, 14px);
+}</code></pre>
+<pre><code class="language-text">/* Container queries adjust token values based on container width */
+@container (min-width: 400px) {
+  .component {
+    --layout-padding: 16px;
+    --font-size: 16px;
+  }
+}</code></pre>
+<pre><code class="language-text">@container (min-width: 800px) {
+  .component {
+    --layout-padding: 24px;
+    --font-size: 18px;
+  }
+}</code></pre>
+<p>In this example<code>.component-container</code> is designated as a <strong>container</strong> using <code>container-type: inline-size;</code>. The <code>.component</code> Inside uses CSS custom properties <code>--layout-padding</code> and <code>--font-size</code> to define its padding and font size. As the container width crosses 400px and 800px thresholds, the container queries update these tokens accordingly. This means the component’s spacing and typography adapt dynamically to the space available, independent of the overall viewport size.</p>
+<p><strong>Pros of the styling system:</strong></p>
+<ul><li>Highly visual, immersive, and fast-loading thanks to CSS-native transitions.</li><li>No reliance on heavy frameworks like GSAP or jQuery.</li></ul>
+<p>By leveraging responsive layout tokens and container queries, Horizon achieves a context-aware design that enhances modularity and maintainability. Developers can move components across different sections without breaking their layout integrity, while designers maintain centralized control over styling through tokens. This technique also future-proofs the theme as browser support for container queries continues to expand.</p>
+<p><strong>Cons:</strong></p>
+<ul><li>CSS logic can be hard to follow — many sections rely on interaction states set by JavaScript.</li><li>Harder to theme for minimal or B2B brands due to visual defaults.</li></ul>
+<p><strong>Best Practices:</strong></p>
+<ul><li>Avoid overriding core animations directly — instead, disable via section settings or use alternate layout classes.</li><li>Customise tokens using <code>:root</code> variables (colours, spacings, etc.).</li><li>Use <code>theme.liquid</code> to inject additional styles in a scoped way.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>JavaScript: Scroll Effects, Section Observers, and Custom Components</h3>
+							</header>
+							<div class="content post-body">
+								<p>Horizon goes beyond Dawn’s minimal JS approach. It includes scroll-triggered animations, sticky product behaviors, and even <strong>intersection observer-based effects</strong>.</p>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>JS Features in Horizon:</h3>
+							</header>
+							<div class="content post-body">
+								<ul><li>Modular components in <code>/assets</code> (e.g. <code>media-gallery.js</code>, <code>sticky-header.js</code>), the use of custom elements (<code>&lt;horizon-media&gt;</code>) and data attributes (<code>data-animate-in</code>) and it also implements <code>requestAnimationFrame</code> loops for buttery-smooth scroll transitions</li></ul>
+<p><strong>Pros:</strong></p>
+<ul><li>Highly interactive — scroll reveals, fade-ins, sticky product summaries.</li><li>JavaScript is cleanly scoped and tied to each section for modularity.</li><li>Fast loading, even with complex visuals, due to minimal framework use.</li></ul>
+<p><strong>Cons:</strong></p>
+<ul><li>Requires a deeper understanding of DOM APIs and performance tuning.</li><li>More points of failure if you remove or alter scroll-tied components.</li></ul>
+<p><strong>Best Practices:</strong></p>
+<ul><li>Test scroll performance on low-end mobile devices.</li><li>Use section settings to toggle animations off instead of editing JS directly.</li><li>Stick to the provided structure — each script assumes DOM conventions.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Sections &amp; Schema: Designed for Brand Expression</h3>
+							</header>
+							<div class="content post-body">
+								<p>Horizon expands upon Dawn’s block-based design system. Each section comes with <strong>more configurable schema options</strong>, including:</p>
+<ul><li>Parallax backgrounds</li><li>Overlay color blending</li><li>Scroll speed adjustment</li><li>Block-level animations</li></ul>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"image"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"settings"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"parallax"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"speed"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"fade_in"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p><strong>Pros:</strong></p>
+<ul><li>Extremely flexible layout builder — control media, spacing, and animation speed per block.</li><li>Merchants get deep control without writing code.</li><li>Supports long-form storytelling and product launches.</li></ul>
+<p><strong>Cons:</strong></p>
+<ul><li>Complex schemas can feel overwhelming for clients.</li><li>Requires more QA testing, especially across screen sizes.</li></ul>
+<p><strong>Best Practices:</strong></p>
+<ul><li>Use logical schema defaults and provide short descriptions for each field.</li><li>Don’t overconfigure — less is more.</li><li>Group related settings into objects when extending.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Performance &amp; Accessibility</h3>
+							</header>
+							<div class="content post-body">
+								<p>Despite being more interactive, Horizon still targets high Core Web Vitals scores. Shopify has done a good job of minimising JS weight and optimising animation performance, as well as including accessibility features such as:</p>
+<ul><li>ARIA roles on modals and menus</li><li>Motion-reduction support (<code>prefers-reduced-motion</code>)</li><li>Logical tab ordering and keyboard support on product modals</li></ul>
+<p><strong>Pros:</strong></p>
+<ul><li>Great balance between animation and performance.</li><li>Responsive across devices and screen sizes.</li><li>Includes motion-safe defaults for accessibility compliance.</li></ul>
+<p><strong>Cons:</strong></p>
+<ul><li>Some motion-heavy features may be overkill for performance-sensitive storefronts.</li><li>Custom animations may require manual testing for screen readers.</li></ul>
+<p><strong>Best Practices:</strong></p>
+<ul><li>Test with Lighthouse and <a href="https://accessibilityinsights.io/" target="_blank" rel="noopener noreferrer">Accessibility Insights</a> regularly.</li><li>Offer fallback layouts in case animations are turned off or fail to load.</li><li>Avoid layering too many effects (e.g., parallax + video + scroll lock).</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Customising Horizon the Right Way</h3>
+							</header>
+							<div class="content post-body">
+								<p>Horizon isn’t meant to be stripped down. If you don’t need visual storytelling, it may be overkill, but if you’re customising for a brand with rich photography, video, and editorial content, it’s an ideal option.</p>
+<p><strong>Customisation Tips for Horizon:</strong></p>
+<ul><li>Use the Shopify CLI (<code>theme serve</code>, <code>theme pull</code>) to version your changes.</li><li>Add your own animated sections using Horizon’s animation schema structure. You don’t necessarily need to rework the out-of-the-box functionality.</li><li>Use metafields and dynamic sources to personalise hero sections, video reveals, and testimonials.</li></ul>
+<p><strong>Customisation Pros:</strong></p>
+<ul><li>Built for branded content and design flexibility.</li><li>Easy to extend with modular JS and section blocks.</li><li>Shopify’s Theme Editor supports all Horizon-specific features.</li></ul>
+<p><strong>Customisation Cons:</strong></p>
+<ul><li>Theme updates may be harder to merge if you’ve modified core animated behavior.</li><li>Requires attention to design hierarchy — visual overload is a risk.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Overall</h3>
+							</header>
+							<div class="content post-body">
+								<p>Horizon is Shopify’s most ambitious reference theme to date. Where Dawn is minimal and general-purpose, Horizon is expressive, rich, and ideal for storytelling-driven stores. If you’re building a storefront for a premium brand with strong imagery, Horizon gives you the tools to craft immersive product experiences.</p>
+<p>But with power comes complexity. Developers customising Horizon should be familiar with CSS animations, modular JavaScript, and advanced schema configuration. Done right, Horizon isn’t just a theme — it’s a branded platform in a box.</p>
+							</div>
+						</section>
+						<ul class="actions">
+							<li><a href="a-developers-technical-breakdown-of-shopifys-dawn-theme.html" class="button">Older post</a></li>
+							<li><a href="../readme.html" class="button primary">All posts</a></li>
+						</ul>
+						<p>Older: <a href="a-developers-technical-breakdown-of-shopifys-dawn-theme.html">A Developer’s Technical Breakdown of Shopify’s Dawn Theme</a></p>
+						<p class="post-source">First published on <a href="https://medium.com/@johnny-taft/a-developers-technical-breakdown-of-shopify-s-horizon-theme-1de79d9949b2" target="_blank" rel="noopener noreferrer">Medium</a>.</p>
+					</div>
+				</section>
+				<section>
+					<header>
+						<h2>Let's build something</h2>
+					</header>
+					<div class="content">
+						<p><strong>Looking for a developer</strong> who can take a brief from design through to a live, maintainable product? I can help with Shopify themes, React or Vue apps, Node and Express APIs, and the full delivery cycle.</p>
+						<ul class="actions">
+							<li><a href="../index.html#contact" class="button primary large">Get in touch</a></li>
+							<li><a href="https://www.linkedin.com/in/jonathan-taft-21087771/" class="button large" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+						</ul>
+					</div>
+				</section>
+				<div class="copyright">&copy; JLT Digital. All rights reserved. <a href="../index.html">Home</a> · <a href="../readme.html">Readme.md</a></div>
+		</div>
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/jquery.scrolly.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+	</body>
+</html>

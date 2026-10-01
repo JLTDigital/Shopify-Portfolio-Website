@@ -105,3 +105,102 @@ button.primary:hover {
 	border-left: 3px solid var(--brand-pink);
 	padding-left: 0.85rem;
 }
+
+.eyebrow {
+	font-family: "Raleway", Helvetica, sans-serif;
+	font-size: 0.65rem;
+	font-weight: 700;
+	letter-spacing: 0.16em;
+	line-height: 1.6;
+	margin: 0 0 1rem 0;
+	text-transform: uppercase;
+}
+
+.eyebrow a {
+	border-bottom-color: transparent;
+	color: var(--brand-pink);
+}
+
+#wrapper > section.intro > header h1.post-title {
+	font-size: 2.35rem;
+	line-height: 1.15;
+	margin-top: 0.65rem;
+}
+
+.post-body h3 {
+	margin-top: 1.5rem;
+}
+
+.post-body .post-figure {
+	margin: 0 0 2rem 0;
+}
+
+.post-body .post-figure img {
+	display: block;
+	height: auto;
+	width: 100%;
+}
+
+.post-body .post-figure figcaption {
+	font-size: 0.8rem;
+	line-height: 1.6;
+	margin-top: 0.75rem;
+}
+
+.post-body .post-link {
+	background: rgba(255, 44, 109, 0.06);
+	border-left: 3px solid var(--brand-pink);
+	margin: 0 0 2rem 0;
+	padding: 0.85rem 1rem;
+}
+
+.post-body .post-link a {
+	border-bottom: 0;
+}
+
+.post-body blockquote {
+	border-left-color: var(--brand-pink);
+}
+
+.post-body pre code {
+	background: #000000;
+	color: #ffffff;
+}
+
+.post-body pre .hljs-keyword,
+.post-body pre .hljs-selector-tag,
+.post-body pre .hljs-selector-pseudo,
+.post-body pre .hljs-built_in,
+.post-body pre .hljs-literal {
+	color: #03ffc5;
+}
+
+.post-body pre .hljs-string,
+.post-body pre .hljs-attr {
+	color: #ff8ab3;
+}
+
+.post-body pre .hljs-number,
+.post-body pre .hljs-title,
+.post-body pre .hljs-class_,
+.post-body pre .hljs-title.class_ {
+	color: #6bffe0;
+}
+
+.post-body pre .hljs-comment {
+	color: #9a9a9a;
+}
+
+.post-body pre .hljs-punctuation {
+	color: #d0d0d0;
+}
+
+.post-source {
+	margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 736px) {
+	#wrapper > section.intro > header h1.post-title {
+		font-size: 1.85rem;
+	}
+}

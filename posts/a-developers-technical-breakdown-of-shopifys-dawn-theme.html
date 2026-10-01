@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>A Developer’s Technical Breakdown of Shopify’s Dawn Theme · Jonny Taft</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="This might be a few years late but when Shopify released the Dawn theme, it wasn’t just offering merchants a new storefront design — it was introducing a…" />
+		<meta name="author" content="Jonny Taft" />
+		<link rel="canonical" href="https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-dawn-theme.html" />
+		<meta property="og:title" content="A Developer’s Technical Breakdown of Shopify’s Dawn Theme · Jonny Taft" />
+		<meta property="og:description" content="This might be a few years late but when Shopify released the Dawn theme, it wasn’t just offering merchants a new storefront design — it was introducing a…" />
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-dawn-theme.html" />
+		<meta property="og:image" content="https://jlt.digital/images/posts/a-developers-technical-breakdown-of-shopifys-dawn-theme/cover.png" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<link rel="alternate" type="application/rss+xml" title="Readme.md · Jonny Taft" href="https://jlt.digital/rss.xml" />
+		<meta property="article:published_time" content="2025-07-11T15:26:58.606Z" />
+		<link rel="prev" href="iterm-2-zsh-script-for-git-branch.html" />
+		<link rel="next" href="a-developers-technical-breakdown-of-shopifys-horizon-theme.html" />
+		<script type="application/ld+json">
+		{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "headline": "A Developer’s Technical Breakdown of Shopify’s Dawn Theme", "description": "This might be a few years late but when Shopify released the Dawn theme, it wasn’t just offering merchants a new storefront design — it was introducing a…", "datePublished": "2025-07-11T15:26:58.606Z", "dateModified": "2025-07-11T15:26:58.606Z", "author": {"@type": "Person", "name": "Jonny Taft", "url": "https://jlt.digital/"}, "publisher": {"@type": "Person", "name": "Jonny Taft"}, "image": "https://jlt.digital/images/posts/a-developers-technical-breakdown-of-shopifys-dawn-theme/cover.png", "mainEntityOfPage": "https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-dawn-theme.html", "url": "https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-dawn-theme.html", "inLanguage": "en-GB", "wordCount": 1059, "timeRequired": "PT5M"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://jlt.digital/"}, {"@type": "ListItem", "position": 2, "name": "Readme.md", "item": "https://jlt.digital/readme.html"}, {"@type": "ListItem", "position": 3, "name": "A Developer’s Technical Breakdown of Shopify’s Dawn Theme", "item": "https://jlt.digital/posts/a-developers-technical-breakdown-of-shopifys-dawn-theme.html"}]}]}
+		</script>
+		<link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<link rel="stylesheet" href="../assets/css/portfolio.css" />
+	</head>
+	<body class="is-preload">
+		<div id="wrapper">
+				<section class="intro">
+					<header>
+						<p class="eyebrow"><a href="../readme.html">Readme.md</a> · <time datetime="2025-07-11">11 July 2025</time> · 5 min read</p>
+						<h1 class="post-title">A Developer’s Technical Breakdown of Shopify’s Dawn Theme</h1>
+						<p>This might be a few years late but when Shopify released the Dawn theme, it wasn’t just offering merchants a new storefront design — it was introducing a new standard for theme development. As the first theme built…</p>
+						<ul class="actions">
+							<li><a href="#article" class="button primary">Read post</a></li>
+							<li><a href="../index.html" class="button">Work</a></li>
+							<li><a href="#article" class="arrow scrolly"><span class="label">Next</span></a></li>
+						</ul>
+					</header>
+					<div class="content">
+						<span class="image fill" data-position="center"><img src="../images/posts/a-developers-technical-breakdown-of-shopifys-dawn-theme/cover.png" alt="A Developer’s Technical Breakdown of Shopify’s Dawn Theme" /></span>
+					</div>
+				</section>
+				<section id="article">
+					<header>
+						<h2>11 July 2025</h2>
+					</header>
+					<div class="content post-body">
+						<p>This might be a few years late but when Shopify released the <strong>Dawn</strong> theme, it wasn’t just offering merchants a new storefront design — it was introducing a new standard for theme development. As the first theme built entirely for <strong>Online Store 2.0</strong>, Dawn reimagines what it means to create performant, flexible, and modular experiences on Shopify.</p>
+						<p>Whether you’re customising a storefront, building a new theme, or exploring how Shopify works under the hood, Dawn is your blueprint. In this article, we’ll break down its architecture, styling system, JavaScript structure, and customisation philosophy from a developer’s point of view — highlighting its strengths, limitations, and best practices.</p>
+						<section>
+							<header>
+								<h3>The Architecture: Modular, JSON-Driven, and OS2-Ready</h3>
+							</header>
+							<div class="content post-body">
+								<p>Dawn embraces the Online Store 2.0 model with a simplified, logical file structure:</p>
+<pre><code class="language-bash">/layout
+  theme.liquid
+/templates
+  product.json
+/sections
+  main-product.liquid
+/snippets
+/assets
+/config
+  settings_schema.json</code></pre>
+<p>Each <code>.json</code> template defines which <strong>sections</strong> appear on the page and in what order. Sections contain the actual rendering logic and often reference <strong>snippets</strong>, which hold reusable components like badges, product prices, or icons.</p>
+<p>This architecture favors <strong>modularity</strong> and <strong>merchant customisation</strong>. Merchants can rearrange content without writing code, and developers can encapsulate logic cleanly.</p>
+<p><strong>Pros:</strong></p>
+<ul><li>Drag-and-drop flexibility in the editor.</li><li>Decoupled layout logic with clean separation of concerns.</li><li>Encourages reusability via snippets and isolated sections.</li></ul>
+<p><strong>Cons:</strong></p>
+<ul><li>JSON templates don’t allow Liquid logic (e.g., <code>if</code>, <code>for</code>).</li><li>Code can get repetitive if sections aren’t abstracted properly.</li></ul>
+<p><strong>Best Practices:</strong></p>
+<ul><li>Keep templates minimal — move logic to sections and snippets.</li><li>Reuse snippets for repeating UI patterns.</li><li>Use Shopify Theme Check to enforce consistency and avoid bugs.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Schema and Settings: Making Themes Configurable</h3>
+							</header>
+							<div class="content post-body">
+								<p>Every section in Dawn is paired with a JSON-based schema, typically embedded via a <code>{% schema %}</code> block at the bottom of the file. This schema defines settings (like text inputs, toggles, and image selectors) and blocks (repeatable components like slides or FAQs).</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Image Banner"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"settings"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"text"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"heading"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"label"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Heading"</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p>These settings empower merchants to control layout, text, imagery, and interactivity — without ever editing code.</p>
+<p><strong>Pros:</strong></p>
+<ul><li>Exposes deep customisation options via Shopify’s theme editor.</li><li>Blocks let you create flexible layouts with reorderable components.</li><li>Keeps code clean by separating configuration from markup.</li></ul>
+<p><strong>Cons:</strong></p>
+<ul><li>Schema logic is static — no conditionals or dynamic rendering.</li><li>Overly complex schemas can bloat sections and confuse editors.</li></ul>
+<p><strong>Best Practices:</strong></p>
+<ul><li>Be intentional with what settings you expose — don’t overwhelm merchants.</li><li>Group related settings and use helpful labels.</li><li>Reuse schema patterns across sections to reduce complexity.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Styling System: Utility-First, CSS-Only, No Build Step</h3>
+							</header>
+							<div class="content post-body">
+								<p>Dawn doesn’t use Tailwind or SCSS. Instead, it uses raw CSS, split across files like <code>base.css</code>, <code>utilities.css</code>, and <code>components.css</code>, with global tokens declared using CSS variables:</p>
+<pre><code class="language-css"><span class="hljs-selector-pseudo">:root</span> {
+  <span class="hljs-attr">--color-text</span>: <span class="hljs-number">#1a1a1a</span>;
+  <span class="hljs-attr">--spacing-base</span>: <span class="hljs-number">1rem</span>;
+}</code></pre>
+<p>The result is a minimalist, fast-loading CSS setup with full theming support and no reliance on preprocessors.</p>
+<p><strong>Pros:</strong></p>
+<ul><li>Fast initial load — no need for compilation.</li><li>CSS variables allow consistent spacing, typography, and color theming.</li><li>Easy for developers to read and override styles directly.</li></ul>
+<p><strong>Cons:</strong></p>
+<ul><li>No nesting or mixins like SCSS offers.</li><li>Can become verbose without utility frameworks.</li></ul>
+<p><strong>Best Practices:</strong></p>
+<ul><li>Avoid editing <code>base.css</code>—use a custom override file for theme extensions.</li><li>Stick to the token system (<code>--spacing-small</code>, etc.) to maintain visual consistency.</li><li>Follow BEM-style class naming for maintainable code.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>JavaScript: Lightweight, Modular, and Framework-Free</h3>
+							</header>
+							<div class="content post-body">
+								<p>Dawn’s JavaScript is written in <strong>vanilla ES6</strong>, using <strong>custom elements</strong> and <strong>modular patterns</strong>. Each interactive component (like quantity selectors or modals) is encapsulated in its own JS file and tied to HTML using <code>data-*</code> attributes or custom tags.</p>
+<p>Example:</p>
+<pre><code class="language-kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title">ProductForm</span> <span class="hljs-title">extends</span> <span class="hljs-title">HTMLElement</span> {
+  connectedCallback() {
+    <span class="hljs-keyword">this</span>.addEventListener(<span class="hljs-string">'submit'</span>, <span class="hljs-keyword">this</span>.onSubmit);
+  }
+}
+customElements.define(<span class="hljs-string">'product-form'</span>, ProductForm);</code></pre>
+<p>This approach keeps things fast, lean, and highly readable for developers.</p>
+<p><strong>Pros:</strong></p>
+<ul><li>No jQuery, no frameworks — just browser-native JavaScript.</li><li>JS is modular and tied closely to HTML behavior.</li><li>Great performance on low-end devices and mobile networks.</li></ul>
+<p><strong>Cons:</strong></p>
+<ul><li>No centralised state management or complex event system.</li><li>No JS bundler or build step by default.</li></ul>
+<p><strong>Best Practices:</strong></p>
+<ul><li>Use <code>data-*</code> attributes and Web Components for encapsulated logic.</li><li>Avoid global variables or scripts that impact the entire DOM.</li><li>If you need reactive UI, consider layering on Alpine.js or your own build setup.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Performance and Accessibility: Fast and Compliant</h3>
+							</header>
+							<div class="content post-body">
+								<p>Dawn was designed to excel in <strong>Core Web Vitals</strong> and <strong>accessibility</strong>:</p>
+<ul><li>All images use <code>loading="lazy"</code>.</li><li>Layouts are responsive and mobile-first.</li><li>ARIA attributes are present on most interactive elements.</li><li>Minimal render-blocking resources are loaded above the fold.</li></ul>
+<p>It sets a strong baseline for Lighthouse performance, especially on mobile.</p>
+<p><strong>Pros:</strong></p>
+<ul><li>Fast load times, especially on slower devices or 3G.</li><li>Strong scores for SEO, accessibility, and UX out of the box.</li><li>Clean HTML and semantic markup makes extension easier.</li></ul>
+<p><strong>Cons:</strong></p>
+<ul><li>Some accessibility patterns are minimal or basic (e.g., skip links or custom announcements are absent).</li><li>No built-in progressive enhancement features like offline support.</li></ul>
+<p><strong>Best Practices:</strong></p>
+<ul><li>Audit your customisations with Lighthouse regularly.</li><li>Use semantic HTML and meaningful alt text.</li><li>Test the theme with keyboard-only navigation and screen readers.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Customization: Fork, Extend, and Iterate</h3>
+							</header>
+							<div class="content post-body">
+								<p>Dawn is designed to be forked and extended. Because Shopify updates Dawn regularly via GitHub, you should always treat the theme as a <strong>starting point</strong>, not a static solution.</p>
+<p>You can build new sections, modify templates, or even rebuild the entire front-end while still benefiting from Dawn’s lean structure and smart defaults.</p>
+<p><strong>Pros:</strong></p>
+<ul><li>Easy to get started and build upon.</li><li>Fully compatible with Shopify CLI and Git version control.</li><li>Encourages modular development patterns.</li></ul>
+<p><strong>Cons:</strong></p>
+<ul><li>Manual effort is needed to merge upstream changes from Shopify.</li><li>Over-customisation can make upgrades difficult.</li></ul>
+<p><strong>Best Practices:</strong></p>
+<ul><li>Always work on a forked copy under source control.</li><li>Add new sections/snippets instead of editing core ones when possible.</li><li>Document custom schema settings and logic for future collaborators.</li></ul>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Final Thoughts</h3>
+							</header>
+							<div class="content post-body">
+								<p>Shopify’s Dawn theme is more than a sleek storefront — it’s a <strong>statement</strong> about how modern themes should be built: modular, performant, accessible, and easy to extend. It balances merchant usability with developer flexibility and lays the groundwork for scalable, future-ready storefronts.</p>
+<p>If you’re building your first Shopify store or crafting a custom theme for a client, Dawn is your best starting point — not just because it’s what Shopify recommends, but because it’s engineered for <strong>modern commerce</strong>.</p>
+							</div>
+						</section>
+						<ul class="actions">
+							<li><a href="a-developers-technical-breakdown-of-shopifys-horizon-theme.html" class="button">Newer post</a></li>
+							<li><a href="iterm-2-zsh-script-for-git-branch.html" class="button">Older post</a></li>
+							<li><a href="../readme.html" class="button primary">All posts</a></li>
+						</ul>
+						<p>Newer: <a href="a-developers-technical-breakdown-of-shopifys-horizon-theme.html">A Developer’s Technical Breakdown of Shopify’s Horizon Theme</a></p>
+						<p>Older: <a href="iterm-2-zsh-script-for-git-branch.html">ITerm 2 &amp; ZSH script for Git Branch</a></p>
+						<p class="post-source">First published on <a href="https://medium.com/@johnny-taft/a-developers-technical-breakdown-of-shopify-s-dawn-theme-0c2c03bad3a3" target="_blank" rel="noopener noreferrer">Medium</a>.</p>
+					</div>
+				</section>
+				<section>
+					<header>
+						<h2>Let's build something</h2>
+					</header>
+					<div class="content">
+						<p><strong>Looking for a developer</strong> who can take a brief from design through to a live, maintainable product? I can help with Shopify themes, React or Vue apps, Node and Express APIs, and the full delivery cycle.</p>
+						<ul class="actions">
+							<li><a href="../index.html#contact" class="button primary large">Get in touch</a></li>
+							<li><a href="https://www.linkedin.com/in/jonathan-taft-21087771/" class="button large" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+						</ul>
+					</div>
+				</section>
+				<div class="copyright">&copy; JLT Digital. All rights reserved. <a href="../index.html">Home</a> · <a href="../readme.html">Readme.md</a></div>
+		</div>
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/jquery.scrolly.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+	</body>
+</html>
