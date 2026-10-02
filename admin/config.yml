@@ -1,8 +1,8 @@
 # Browser editor for new posts. Existing Medium HTML exports stay in
 # content/posts and are left out of this collection (extension: md).
-# Sign-in on the live site uses GitHub via Netlify. See the project notes
-# for the one-time OAuth setup. On localhost, `npx decap-server` writes
-# files into this repo instead.
+# Sign-in on the live site uses a GitHub OAuth app. The callback URL for
+# that app is https://jlt.digital/api/callback. On localhost,
+# `npx decap-server` writes files into this repo instead.
 
 local_backend: true
 
@@ -10,6 +10,8 @@ backend:
   name: github
   repo: JLTDigital/Shopify-Portfolio-Website
   branch: main
+  base_url: https://jlt.digital
+  auth_endpoint: api/auth
 
 site_url: https://jlt.digital
 display_url: https://jlt.digital
