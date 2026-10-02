@@ -1,0 +1,66 @@
+# Browser editor for new posts. Existing Medium HTML exports stay in
+# content/posts and are left out of this collection (extension: md).
+# Sign-in on the live site uses GitHub via Netlify. See the project notes
+# for the one-time OAuth setup. On localhost, `npx decap-server` writes
+# files into this repo instead.
+
+local_backend: true
+
+backend:
+  name: github
+  repo: JLTDigital/Shopify-Portfolio-Website
+  branch: main
+
+site_url: https://jlt.digital
+display_url: https://jlt.digital
+logo_url: https://jlt.digital/images/favicon.ico
+publish_mode: simple
+
+media_folder: images/posts
+public_folder: /images/posts
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: content/posts
+    create: true
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    sortable_fields:
+      - date
+      - title
+    preview_path: "posts/{{slug}}.html"
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish date
+        name: date
+        widget: datetime
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        picker_utc: true
+      - label: Summary
+        name: summary
+        widget: text
+        required: false
+        hint: "Shown on the homepage and the Readme listing. Leave blank to use the first paragraph."
+      - label: Cover
+        name: cover
+        widget: image
+        required: false
+        hint: "Landscape image used as the hero and the social preview."
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+        required: false
+        hint: "Drafts stay in the editor and are left off the public site."
+      - label: Body
+        name: body
+        widget: markdown
+        hint: "Use Heading 2 for each section. Those become the sections on the page."

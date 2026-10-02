@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""Build the Readme.md blog from Medium HTML exports in content/posts.
+"""Build the Readme.md blog.
 
-Drop new exports into content/posts and run:
+Existing posts are Medium HTML exports in content/posts. New posts are
+Markdown files in that same folder, created in the browser with Decap CMS
+(/admin/) or written by hand. Run:
 
     python3 scripts/build_readme.py
 """
@@ -12,7 +14,7 @@ import os
 import re
 import shutil
 import subprocess
-from datetime import datetime
+from datetime import date, datetime
 from urllib.parse import unquote, urlparse
 
 from lxml import html as lxml_html
@@ -889,13 +891,221 @@ def render_rss(posts):
 """
 
 
-def main():
-    sources = sorted(
-        os.path.join(SOURCE_DIR, name)
-        for name in os.listdir(SOURCE_DIR)
-        if name.endswith(".html")
+def load_markdown_tools():
+    try:
+        import markdown
+        import yaml
+    except ImportError as error:
+        raise SystemExit(
+            "Markdown posts need the Markdown and PyYAML packages.\n"
+            "Install them with: python3 -m pip install -r requirements.txt"
+        ) from error
+    return markdown, yaml
+
+
+def split_front_matter(text):
+    if not text.startswith("---"):
+        return {}, text
+    parts = text.split("---", 2)
+    if len(parts) < 3:
+        return {}, text
+    _, yaml_mod = load_markdown_tools()
+    meta = yaml_mod.safe_load(parts[1]) or {}
+    if not isinstance(meta, dict):
+        raise SystemExit("Post front matter must be a set of fields")
+    return meta, parts[2].lstrip("\n")
+
+
+def normalize_published(value):
+    if isinstance(value, datetime):
+        text = value.strftime("%Y-%m-%dT%H:%M:%S.000Z")
+    elif isinstance(value, date):
+        text = value.strftime("%Y-%m-%dT00:00:00.000Z")
+    else:
+        text = clean(str(value or ""))
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", text):
+            text = text + "T00:00:00.000Z"
+        elif text.endswith("+00:00"):
+            text = text[:-6] + "Z"
+    if not text:
+        text = "2020-01-01T00:00:00.000Z"
+    datetime.fromisoformat(text.replace("Z", "+00:00"))
+    return text
+
+
+def normalize_cover(value):
+    if isinstance(value, list):
+        value = value[0] if value else ""
+    if isinstance(value, dict):
+        value = value.get("image") or value.get("src") or ""
+    value = clean(str(value or ""))
+    if not value:
+        return None
+    if value.startswith("http://") or value.startswith("https://"):
+        return value
+    return value.lstrip("/")
+
+
+def rewrite_post_urls(fragment):
+    def replace(match):
+        attr, quote, url = match.group(1), match.group(2), match.group(3)
+        if url.startswith("/") and not url.startswith("//"):
+            url = ".." + url
+        elif url.startswith("images/"):
+            url = "../" + url
+        return f"{attr}={quote}{url}{quote}"
+
+    return re.sub(r"\b(src|href)=([\"'])([^\"']+)\2", replace, fragment)
+
+
+def markdown_figure(el):
+    if el.tag != "p":
+        return ""
+    images = [child for child in el if isinstance(child.tag, str) and child.tag == "img"]
+    if len(images) != 1 or len(list(el)) != 1:
+        return ""
+    if clean(el.text or "") or clean(images[0].tail or ""):
+        return ""
+    image = images[0]
+    src = image.get("src") or ""
+    if src.startswith("/") and not src.startswith("//"):
+        src = ".." + src
+    elif src.startswith("images/"):
+        src = "../" + src
+    alt = image.get("alt") or ""
+    return (
+        f'<figure class="post-figure"><img src="{esc_attr(src)}" alt="{esc_attr(alt)}" '
+        'loading="lazy" decoding="async" /></figure>'
     )
-    posts = [parse_post(path) for path in sources]
+
+
+def chapters_from_markdown(html_body, title_key):
+    if not html_body.strip():
+        return [], "", 0
+    wrapper = lxml_html.fragment_fromstring(html_body, create_parent="div")
+    events = []
+    first_paragraph = ""
+    for child in wrapper:
+        if not isinstance(child.tag, str):
+            continue
+        if child.tag in ("h1", "h2"):
+            heading = strip_emoji(child.text_content())
+            if heading and normalize(heading) != title_key:
+                events.append(("h2", heading))
+            continue
+        if child.tag in ("h3", "h4", "h5", "h6"):
+            heading = strip_emoji(child.text_content())
+            if heading:
+                events.append(("h3", heading))
+            continue
+        figure = markdown_figure(child)
+        if figure:
+            events.append(("html", figure))
+            continue
+        rendered = rewrite_post_urls(lxml_html.tostring(child, encoding="unicode", method="html"))
+        if child.tag == "p" and not first_paragraph:
+            first_paragraph = clean(child.text_content())
+        if clean(child.text_content()) or child.xpath(".//img|.//pre|.//iframe"):
+            events.append(("html", rendered))
+
+    chapters = []
+    for kind, value in events:
+        if kind == "h2":
+            chapters.append({"heading": value, "html": []})
+            continue
+        if kind == "h3":
+            if chapters and chapters[-1]["heading"]:
+                chapters[-1]["html"].append(f"<h3>{esc(value)}</h3>")
+            else:
+                chapters.append({"heading": value, "html": []})
+            continue
+        if not chapters:
+            chapters.append({"heading": None, "html": []})
+        chapters[-1]["html"].append(value)
+    words = len(re.findall(r"\w+", wrapper.text_content()))
+    return chapters, first_paragraph, words
+
+
+def parse_markdown(path):
+    markdown_mod, _yaml_mod = load_markdown_tools()
+    meta, body = split_front_matter(open(path, encoding="utf-8").read().lstrip("\ufeff"))
+    if meta.get("draft") is True:
+        return None
+    title = strip_emoji(str(meta.get("title") or ""))
+    if not title:
+        raise SystemExit(f"{os.path.basename(path)}: add a title")
+    summary = clean(str(meta.get("summary") or meta.get("description") or ""))
+    published = normalize_published(meta.get("date"))
+    explicit = clean(str(meta.get("slug") or ""))
+    slug = slugify(explicit) if explicit else slugify(os.path.splitext(os.path.basename(path))[0].replace("-", " "))
+    display_date, day = format_date(published)
+    html_body = markdown_mod.markdown(
+        body,
+        extensions=["fenced_code", "tables", "sane_lists"],
+    )
+    chapters, first_paragraph, words = chapters_from_markdown(html_body, normalize(title))
+    minutes = max(1, round(words / 230)) if words else 1
+    base = summary or first_paragraph or title
+    cover = normalize_cover(meta.get("cover"))
+    warnings = []
+    if cover and not cover.startswith("http") and not os.path.isfile(os.path.join(ROOT, cover)):
+        warnings.append(f"cover not found: {cover}")
+    return {
+        "title": title,
+        "slug": slug,
+        "summary": summary,
+        "description": excerpt(base, 155),
+        "card": excerpt(base, 220),
+        "published": published,
+        "day": day,
+        "display_date": display_date,
+        "minutes": minutes,
+        "words": words,
+        "medium": "",
+        "cover": cover,
+        "cover_alt": title,
+        "chapters": [chapter for chapter in chapters if chapter["html"] or chapter["heading"]],
+        "warnings": warnings,
+        "source": os.path.basename(path),
+    }
+
+
+def update_home(posts):
+    path = os.path.join(ROOT, "index.html")
+    raw = open(path, "rb").read()
+    newline = "\r\n" if b"\r\n" in raw else "\n"
+    document = raw.decode("utf-8").replace("\r\n", "\n")
+    start = "<!-- latest-posts:start -->"
+    end = "<!-- latest-posts:end -->"
+    items = [
+        f'\t\t\t\t\t\t\t\t<li><a href="posts/{post["slug"]}.html">{esc(post["title"])}</a></li>'
+        for post in posts[:3]
+    ]
+    block = start + "\n" + "\n".join(items) + "\n\t\t\t\t\t\t\t\t" + end
+    pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
+    if not pattern.search(document):
+        raise SystemExit("index.html is missing the latest-posts markers")
+    updated = pattern.sub(block, document, count=1)
+    if updated == document:
+        return
+    if newline == "\r\n":
+        updated = updated.replace("\n", "\r\n")
+    with open(path, "wb") as handle:
+        handle.write(updated.encode("utf-8"))
+
+
+def main():
+    names = sorted(os.listdir(SOURCE_DIR))
+    posts = [parse_post(os.path.join(SOURCE_DIR, name)) for name in names if name.endswith(".html")]
+    posts.extend(
+        post
+        for post in (
+            parse_markdown(os.path.join(SOURCE_DIR, name))
+            for name in names
+            if name.endswith(".md") or name.endswith(".markdown")
+        )
+        if post
+    )
     posts.sort(key=lambda post: post["published"], reverse=True)
     slugs = [post["slug"] for post in posts]
     if len(slugs) != len(set(slugs)):
@@ -950,9 +1160,11 @@ def main():
             "User-agent: *\n"
             "Allow: /\n"
             "Disallow: /content/\n"
+            "Disallow: /admin/\n"
             f"Sitemap: {SITE}/sitemap.xml\n"
         )
-    print(f"Wrote {len(posts)} posts, readme.html, sitemap.xml, rss.xml")
+    update_home(posts)
+    print(f"Wrote {len(posts)} posts, readme.html, index.html, sitemap.xml, rss.xml")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /content/
+Disallow: /admin/
 Sitemap: https://jlt.digital/sitemap.xml
